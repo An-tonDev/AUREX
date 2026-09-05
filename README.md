@@ -1,0 +1,2 @@
+# AUREX
+Fintech made easy
