@@ -1,7 +1,7 @@
 const { NotFoundError } = require('../../utils/AppError')
 const paystack=require('../../utils/paystack')
 const walletService=require('../../wallet/wallet-service')
-const prisma=require('../../prisma/client')
+const {prisma}=require('../../prisma/client')
 const transactionService=require('../../Transaction/transaction-service')
 
 const reconcileTransaction=async(transaction)=>{

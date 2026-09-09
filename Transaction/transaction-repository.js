@@ -1,4 +1,4 @@
-const prisma=require('../prisma/client')
+const {prisma}=require('../prisma/client')
 
 const getTransaction=async (id)=>{
     return await prisma.transaction.findUnique({where:{id}})

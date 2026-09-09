@@ -1,4 +1,4 @@
-const prisma=require('../../utils/paystack')
+const {prisma}=require('../../prisma/client')
 
 const findStaleTransactions=async()=>{
     const cutoff= new Date(Date.now()-30*60*60*1000)

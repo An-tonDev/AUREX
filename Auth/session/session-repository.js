@@ -1,4 +1,4 @@
-const prisma=require('../../prisma/client')
+const {prisma}=require('../../prisma/client')
 
 const createSession= async(data)=>{
    return await prisma.session.create({data})

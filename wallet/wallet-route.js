@@ -3,6 +3,6 @@ const express=require('express')
 
 const Router=express.Router()
 
-Router.psot('/:id',walletController.addBalance)
+Router.post('/add-bal/:id',walletController.addBalance)
 
 module.exports=Router

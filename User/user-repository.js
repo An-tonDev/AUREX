@@ -1,4 +1,4 @@
-const prisma=require('../prisma/client')
+const {prisma}=require('../prisma/client')
 
 const createUser=async (data)=>{
     return await prisma.user.create({data})

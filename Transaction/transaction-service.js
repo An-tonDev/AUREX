@@ -20,8 +20,8 @@ const createTransaction=async(data)=>{
 const updateTransaction=async (id,data)=>{
   
     const transaction= await getTransactionById(id)
-    const transaction= await transactionRepository.updateTransaction(transaction.id,data)
-     return transaction
+    const updatedTransaction= await transactionRepository.updateTransaction(transaction.id,data)
+     return updatedTransaction
 }
 
 const getTransactionById=async(id)=>{

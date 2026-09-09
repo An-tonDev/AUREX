@@ -4,7 +4,6 @@ const paystack=require('../utils/paystack')
 const transactionService=require('../Transaction/transaction-service')
 const userService=require('../User/user-service')
 
-
 const addBalance=async(id,data,user)=>{
 
   //get wallet
@@ -22,7 +21,7 @@ const paystackResponse= await paystack.post('/transaction/initialize',{
   })
 
    const transaction= transactionService.createTransaction({
-    senderWalletId:`SYSTEM-${wallet.id}`,
+    senderWalletId:parseInt(process.env.SYSTEM_WALLET_ID),
     receiverWalletId:wallet.id,
     amount:data.amount*100,
     currency:'NGN',
@@ -31,6 +30,10 @@ const paystackResponse= await paystack.post('/transaction/initialize',{
   })
       
   return {paystackResponse,wallet}           
+}
+
+const withdrawFunds=()=>{
+   //get wallet, amd necccessary details, and then call paystack and do a new transaction
 }
 
 const getWallet=async (id)=>{
