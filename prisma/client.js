@@ -12,6 +12,7 @@ const prisma= new PrismaClient({adapter})
 const connectDB=async ()=>{
     try{
        await prisma.$connect()
+       console.log(typeof(process.env.DATABASE_URL))
        console.log('db is connected')
     }catch(error){
       console.error('culd not connect DB')

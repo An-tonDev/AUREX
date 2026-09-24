@@ -33,9 +33,9 @@ app.use('/api/v1/wallet',walletRouter)
 app.use('/api/v1/webhook',webhookRouter)
 
 cron.schedule('*/10 * * * *',()=>{
- console.log('running reconcillation for transaction')
+console.log('running reconcillation for transaction')
    runReconcillation()
-})
+}) 
 
 app.use(errorHandler)
 app.use(catchAllHandler)

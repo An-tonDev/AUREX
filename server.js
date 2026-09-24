@@ -1,8 +1,7 @@
-const app =require('./app')
 const dotenv =require('dotenv')
-const { connectDB,disconnectDB }= require('./prisma/client')
-
 dotenv.config({path:'./.env'})
+const app =require('./app')
+const { connectDB,disconnectDB }= require('./prisma/client')
 
 
 const port= process.env.PORT
