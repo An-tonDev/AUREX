@@ -3,6 +3,7 @@ const express=require('express')
 
 const Router=express.Router()
 
-Router.post('/add-bal/:id',walletController.addBalance)
+Router.post('/addbal/:id',walletController.addBalance)
+Router.post('/withdraw/:id',walletController.withdrawal)
 
 module.exports=Router

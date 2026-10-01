@@ -44,6 +44,7 @@ exports.paystackWebhook=async(req,res)=>{
         console.log('wallet witht his id does not exist')
         return res.sendStatus(200)
       }
+     if(transaction.type=='DEPOSIT'){
            //transactional postgres..begin..commit
       await prisma.$transactional([
               prisma.transaction.update({
@@ -73,7 +74,37 @@ exports.paystackWebhook=async(req,res)=>{
                 ]
               })
       ])
+    }else if(transaction.type=='WITHDRAWAL'){
+      await prisma.$transactional([
+          prisma.transaction.update({
+            where:{id: transaction.id},
+            data:{status:'SUCCESS'}
+          }),
+          prisma.wallet.update({
+             where:{id:wallet.id},
+             data:{balance: wallet.balance-amount}
+          }),
+          prisma.ledgerEntry.createMany({
+            data:[
+                {
+                  transactionId: transaction.id,
+                  walletId: transaction.senderWalletId,
+                  type:'DEBIT',
+                  currency:'NGN',
+                  amount:amount
+                },
+                {
+                  transactionId: transaction.id,
+                  walletId: transaction.receiverWalletId,
+                  type:'CREDIT',
+                  currency:'NGN',
+                  amount:amount
+                }
+            ]
+          })
+      ])
     }
+  }
 
     const handleFailedEvent=async(event)=>{
       const transaction=await transactionService.getTransactionByReference(event.data.reference)

@@ -19,3 +19,22 @@ exports.addBalance= catchAsync(async(req,res,next)=>{
      }
      next()
 })
+
+exports.withdrawal= catchAsync(async(req,res,next)=>{
+     try{
+       const response=await walletService.withdrawFunds(req.params.id,req.body,req.user)
+       res.status(200).json({
+        status:'success',
+        data:{
+          wallet: response.wallet,
+          url: response.paystackResponse.data.data.authorizationUrl
+        }
+       })
+     }catch(error){
+        res.status(400).json({
+            status:'fail',
+            message: error
+        })
+     }
+     next()
+})

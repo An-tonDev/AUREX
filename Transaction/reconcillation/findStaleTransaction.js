@@ -6,7 +6,6 @@ const findStaleTransactions=async()=>{
    return await prisma.transaction.findMany({
         where:{
             status:'PENDING',
-            type:'DEPOSIT',
             createdAt:{lt:cutoff}
         }
     })

@@ -74,6 +74,7 @@ model Wallet{
   currency String
   user User @relation(fields:[userId],references:[id])
   userId Int
+  pinHash String?
   status WalletStatus @default(ACTIVE)
   createdAt DateTime @default(now())
   sentTransactions Transaction[] @relation("sentTransactions")
