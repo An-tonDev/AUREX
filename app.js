@@ -4,11 +4,12 @@ const app=express()
 const userRouter=require('./User/user-routes')
 const webhookRouter=require('./wallet/webhook-routes')
 const walletRouter=require('./wallet/wallet-route')
+const authRouter=require('./Auth/auth-router')
 const errorHandler=require('./middleware/errorHandler')
 const runReconcillation=require('./Transaction/reconcillation/runReconcicleTransaction')
 const cron=require('node-cron')
 
-if(process.env.NODE_ENV === 'developement'){
+if(process.env.NODE_ENV === 'development'){
     app.use(morgan('dev'))
 }
 
@@ -28,6 +29,7 @@ app.use('/webhook/paystack',express.json({
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
+app.use('/api/v1/auth',authRouter)
 app.use('/api/v1/user',userRouter)
 app.use('/api/v1/wallet',walletRouter)
 app.use('/api/v1/webhook',webhookRouter)

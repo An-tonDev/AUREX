@@ -86,6 +86,6 @@ exports.paystackWebhook=async(req,res)=>{
 
         await transactionService.updateTransaction({id:transaction.id},{status:'FAILED'})
 
-      return res.sendStatus(200)
+         return res.sendStatus(200)
       }
 }

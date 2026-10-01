@@ -13,11 +13,9 @@ const generateToken=(userId,res)=>{
         sameSite:'strict',
         maxAge: 60*60*24*5*1000
     })
+    const token=[accesstoken,refreshToken]
      
-    return {
-        accessToken,
-        refreshToken 
-    }
+    return token
       
 }
 

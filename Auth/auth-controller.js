@@ -32,9 +32,11 @@ const getIpAddress=(req)=>{
     return req.ip || req.connection.remoteAddress
 }
 
-const createSessionSendToken=(user,req,res,statusCode)=>{
+const createSessionSendToken=async(user,req,res,statusCode)=>{
                   
-    const{accesstoken,refreshToken}=generateToken(user.id,res)
+    const token =generateToken(user.id,res)
+    const accesstoken=token[0]
+    const refreshToken=token[1]
 
 
     const refreshTokenHash= await bcrypt.hash(refreshToken,10)
@@ -44,7 +46,7 @@ const createSessionSendToken=(user,req,res,statusCode)=>{
     const deviceName= getDeviceName(req)
 
        const newSession= await  sessionService.createSession({
-             userId: newUser.id,
+             userId: user.id,
              refreshTokenHash,
              deviceName,
              ipAddress,
